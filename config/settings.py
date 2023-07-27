@@ -1,9 +1,9 @@
 from pathlib import Path
-import my_settings
+import mysettings
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = my_settings.SECRET_KEY
+SECRET_KEY = mysettings.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
