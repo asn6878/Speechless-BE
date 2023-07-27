@@ -1,0 +1,23 @@
+.Python
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+[Ss]cripts
+pyvenv.cfg
+
+# 가상환경 디렉토리
+drf-venv/
+pip-selfcheck.json
+
+# 시크릿 키 및 DB 관련 설정 분리용 파일
+mysettings.py
+
+# 파이썬 캐시 파일
+__pycache__/
+*.pyc
+__init__.py
+
+# Django ORM 관련 파일
+migrations/
