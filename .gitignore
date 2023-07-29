@@ -21,3 +21,4 @@ __init__.py
 
 # Django ORM 관련 파일
 migrations/
+*.sqlite3
