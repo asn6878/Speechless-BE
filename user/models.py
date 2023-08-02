@@ -53,4 +53,5 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return "<user_id : %d / user_name : %s>" % (self.user_id, self.user_name)
 
-    
+
+
