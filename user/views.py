@@ -18,14 +18,14 @@ class UserViewSet(viewsets.ModelViewSet):
             return UserCreateSerializer
         elif self.action == 'retrieve':
             return UserInfoSerializer
-        else :
+        elif self.action == 'update' :
+            return UserCreateSerializer 
+        elif self.action == 'list' :
+            return UserInfoSerializer
+        elif self.action == 'destroy' :
             return UserSerializer
-        # elif self.action == 'destroy':
-        #     return CustomUserDestroySerializer
-        # elif self.action == 'list':
-        #     return CustomUserListSerializer
-        # else:
-        #     return super().get_serializer_class()
+        else:
+            return UserSerializer
 
     # 각 기능을 커스터마이징 하기위해 오버라이딩 해줬다.
     def create(self, request, *args, **kwargs):
@@ -33,3 +33,9 @@ class UserViewSet(viewsets.ModelViewSet):
         request.data['password'] = make_password(instance)
 
         return super().create(request, *args, **kwargs)
+    
+    def update(self, request, *args, **kwargs):
+        instance = request.data.get('password')
+        request.data['password'] = make_password(instance)
+
+        return super().update(request, *args, **kwargs)
