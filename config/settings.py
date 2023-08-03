@@ -22,6 +22,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework', # drf
     'drf_yasg', # swagger
+    'estimate',
+    'user',
+    'info',
 ]
 
 MIDDLEWARE = [
@@ -64,6 +67,9 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# 커스텀 User 인증 모델 설정
+AUTH_USER_MODEL = 'user.CustomUser'
 
 
 # Password validation
