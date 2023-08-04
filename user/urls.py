@@ -15,6 +15,7 @@ router.register('', views.UserViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('tokens/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('tokens/refreshments/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('login/tokens/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('login/refreshments/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
+
