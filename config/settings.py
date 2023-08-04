@@ -71,6 +71,15 @@ DATABASES = {
 # 커스텀 User 인증 모델 설정
 AUTH_USER_MODEL = 'user.CustomUser'
 
+# 커스텀 인가, 인증 클래스 설정
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'user.authentication.JWTAuthentication',
+    )
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
