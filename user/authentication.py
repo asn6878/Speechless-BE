@@ -40,7 +40,7 @@ class JWTAuthentication(BaseAuthentication):
     
     # JWT 토큰을 통해 얻어낸 유저 정보를 활용해 user 객체를 리턴해주는 함수.
     def authenticate_credentials(self, request, key):
-        token_user = User.objects.filter(user_name=key).first()
+        token_user = User.objects.filter(user_id=key).first()
 
         if token_user is None:
             raise exceptions.AuthenticationFailed('해당하는 User가 존재하지 않습니다.')
