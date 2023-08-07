@@ -14,6 +14,9 @@ class Estimate(models.Model):
     # 0 (진행전) 1 (계약진행중) 3 (계약 진행완료)
     status = models.IntegerField(default=0)
 
+    def __str__(self):
+        return self.title
+
 class Bookmark(models.Model):
     bookmark_id = models.BigAutoField(primary_key=True, unique=True, editable=False)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
