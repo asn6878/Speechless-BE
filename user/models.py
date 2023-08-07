@@ -51,7 +51,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ["user_name", "email"]
 
     def __str__(self):
-        return "<user_id : %d / user_name : %s>" % (self.user_id, self.user_name)
+        return "%s" % self.user_name
 
 
 
