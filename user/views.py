@@ -61,9 +61,18 @@ class UserViewSet(viewsets.ModelViewSet):
     
     def update(self, request, *args, **kwargs):
         # 인증
-        user = authenticate(request)
-        print("views.py authenticate Return 값",user)
-        instance = request.data.get('password')
-        request.data['password'] = make_password(instance)
+        user = request.user
+        if request.user != None:
+            # print("views.py user객체.user_id",user.user_id)
+            # print("request.user_id", kwargs['pk'])
+            if user.user_id == int(kwargs['pk']):
 
-        return super().update(request, *args, **kwargs)
+                instance = request.data.get('password')
+                request.data['password'] = make_password(instance)
+
+                return super().update(request, *args, **kwargs)
+            else:
+                raise exceptions.PermissionDenied('수정 권한이 없습니다.')
+        else:
+            # 현재 토큰이 존재하지 않음.
+            raise exceptions.AuthenticationFailed('로그인이 필요합니다.')
