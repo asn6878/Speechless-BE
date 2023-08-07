@@ -11,6 +11,7 @@ class Estimate(models.Model):
     video = models.FileField(upload_to='estimate/%Y/%m/%d', blank=True)
     content = models.TextField(blank=True)
     dead_line = models.DateTimeField(blank=True)
+    # 0 (진행전) 1 (계약진행중) 3 (계약 진행완료)
     status = models.IntegerField(default=0)
 
 class Offer(models.Model):
