@@ -59,12 +59,13 @@ class EstimateDetailSerializer(serializers.ModelSerializer):
     
 # 견적 생성 시리얼라이저
 class EstimateCreateSerializer(serializers.ModelSerializer):
+    user_info = UserSerializer(read_only = True)
 
     class Meta:
         model = Estimate
         fields = [
             'title',
-            'user_id',
+            'user_info',
             'created_at',
             'video',
             'content',
@@ -72,8 +73,20 @@ class EstimateCreateSerializer(serializers.ModelSerializer):
             'status',
         ]
 
+    def create(self, validated_data):
+        user = self.context['request'].user
+
+        user_data = {
+            'user_id': user.user_id,
+            'user_name': user.user_name,
+            'level': user.level,
+        }
+        return Estimate.objects.create(user_info=user_data, **validated_data)
+    
     def __str__(self):
         return f'estimate_id = {self.estimate_id}'
+    
+    
 
 # 입찰 리스트 시리얼라이저
 class OfferListSerializer(serializers.ModelSerializer):

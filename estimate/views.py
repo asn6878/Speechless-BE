@@ -19,8 +19,7 @@ class EstimateViewSet(viewsets.ModelViewSet):
 
     def get_serializer_class(self):
         if self.action == 'create':
-            print("EstimateViewSet create called")
-            return None
+            return EstimateCreateSerializer
         elif self.action == 'retrieve':
             return EstimateDetailSerializer
         elif self.action == 'update' :
@@ -47,26 +46,25 @@ class EstimateViewSet(viewsets.ModelViewSet):
         else:
             return [AllowAny()]
         
-    def create(self, request):
-        # 여기서 생성되는 Estimate object는, user_info 필드에 request.user.user_id 값이 user_id 인 User object가 들어간다.
+    # def create(self, request):
+    #     # 여기서 생성되는 Estimate object는, user_info 필드에 request.user.user_id 값이 user_id 인 User object가 들어간다.
+    #     print(request.user)
+    #     serializer = EstimateCreateSerializer(data={
+    #         'title': request.data.get('title'),
+    #         'user_info': request.user.user_id,
+    #         'video': request.data.get('video'),
+    #         'content': request.data.get('content'),
+    #         'dead_line': request.data.get('dead_line'),
+    #         'status': request.data.get('status'),
+    #     })
+    #     if serializer.is_valid():
+    #         self.serializer_class = serializer
+    #         estimate = serializer.save()
+    #     else :
+    #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        serializer = EstimateCreateSerializer(data={
-            'title': request.data.get('title'),
-            'user_info': request.user,
-            'video': request.data.get('video'),
-            'content': request.data.get('content'),
-            'dead_line': request.data.get('dead_line'),
-            'status': request.data.get('status'),
-        })
-        if serializer.is_valid():
-            self.serializer_class = serializer
-            estimate = serializer.save()
-        else :
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    #     return Response(serializer.data, status=status.HTTP_201_CREATED)
     
-
 
     def update(self, request, *args, **kwargs):
         user = request.user
