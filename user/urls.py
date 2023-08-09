@@ -11,14 +11,6 @@ from rest_framework_simplejwt.views import (
 
 router = DefaultRouter()
 router.register('', views.UserViewSet)
-
-urlpatterns = [
-    path('', include(router.urls)),
-    path('login/tokens/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('login/refreshments/', TokenRefreshView.as_view(), name='token_refresh'),
-]
-
-router = DefaultRouter()
 router.register(r'notifications', NotificationViewSet)
 router.register(r'reviews', ReviewViewSet)
 router.register(r'messages', MessageViewSet)
@@ -26,5 +18,8 @@ router.register(r'messages', MessageViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('login/tokens/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('login/refreshments/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
+
 
