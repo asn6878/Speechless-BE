@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser
+from .models import CustomUser, Notification, Review, Message
 
 
 # 기본 시리얼라이저
@@ -37,3 +37,21 @@ class UserCreateSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'password': {'write_only': True},
         }
+
+#알림
+class NotificationSerializer(serializers.Serializer):
+    class Meta:
+        model = Notification
+        fields = ['notice_id', 'user_id', 'title', 'content', 'is_checked']
+
+#리뷰
+class ReviewSerializer(serializers.Serializer):
+    class Meta:
+        model = Review
+        fields = ['review_id', 'user_id', 'content', 'img']
+    
+#쪽지
+class MessageSerializer(serializers.Serializer):
+    class Meta:
+        model = Message
+        fields = ['sender', 'receiver', 'title', 'content', 'sent_time', 'read_status', 'read_time', 'starred', 'deleted', 'attachments']

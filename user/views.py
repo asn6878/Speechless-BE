@@ -2,6 +2,9 @@
 from rest_framework import viewsets
 from django.contrib.auth.hashers import make_password
 from rest_framework import exceptions
+from .models import Notification, Review, Message
+from .serializers import NotificationSerializer, ReviewSerializer, MessageSerializer
+
 
 # drf 권한 관련 라이브러리
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
@@ -84,3 +87,17 @@ class UserViewSet(viewsets.ModelViewSet):
                 raise exceptions.PermissionDenied('삭제 권한이 없습니다.')
         else :
             raise exceptions.PermissionDenied('로그인이 필요합니다.')
+# 알림
+class NotificationViewSet(viewsets.ModelViewSet):
+    queryset = Notification.objects.all()
+    serializer_class = NotificationSerializer
+
+#리뷰
+class ReviewViewSet(viewsets.ModelViewSet):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+
+#쪽지
+class MessageViewSet(viewsets.ModelViewSet):
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer

@@ -25,7 +25,7 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/users/', include('user.urls')),
-    path('api/estimates/', include('estimate.urls'))
+    path('api/info/', include('info.urls')),
 ]
 
 if settings.DEBUG:
@@ -34,3 +34,5 @@ if settings.DEBUG:
         re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
         re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc')
         ]
+
+

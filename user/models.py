@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
+from django.conf import settings
 from django.utils import timezone
 
 class CustomUserManager(BaseUserManager):
@@ -55,3 +56,36 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 
 
+# 알림
+class Notification(models.Model):
+    notice_id = models.IntegerField(primary_key=True)
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE)
+    title = models.CharField(max_length=50)
+    content = models.TextField()
+    is_checked = models.BooleanField()
+
+#리뷰
+class Review(models.Model):
+    review_id = models.IntegerField(primary_key=True)
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE)
+    content = models.TextField() 
+    img = models.ImageField()
+
+#쪽지
+class Message(models.Model):
+    sender = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='sent_messages', on_delete=models.CASCADE) #발신자
+    receiver = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='received_messages', on_delete=models.CASCADE) #수신자
+    title = models.CharField(max_length=100) #제목
+    content = models.TextField() #내용
+    sent_time = models.DateTimeField(auto_now_add=True) #전송시간
+    read_status = models.BooleanField(default=False) #읽음 상태
+    read_time = models.DateTimeField(null=True, blank=True) #읽은 시간
+    starred = models.BooleanField(default=False) #중요 표시
+    deleted = models.BooleanField(default=False) #첨부파일
+    attachments = models.FileField(upload_to='attachments/', blank=True, null=True) #삭제 플래그: 쪽지를 삭제했는지의 여부
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['-sent_time']
