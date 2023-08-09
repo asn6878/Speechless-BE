@@ -25,6 +25,7 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/users/', include('user.urls')),
+    path('api/estimates/', include('estimate.urls'))
 ]
 
 if settings.DEBUG:

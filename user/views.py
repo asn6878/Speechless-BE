@@ -33,7 +33,6 @@ class UserViewSet(viewsets.ModelViewSet):
             return UserSerializer
         else:
             # 잘못된 요청임을 알리는 예외 발생
-            print("이상한 요청")
             raise exceptions.MethodNotAllowed(self.request.method)
 
     # 기능별로 다른 권한을 사용 
@@ -53,7 +52,6 @@ class UserViewSet(viewsets.ModelViewSet):
 
     # 각 기능을 커스터마이징(여기서는 비밀번호 암호화) 하기위해 오버라이딩 해줬다.
     def create(self, request, *args, **kwargs):
-        self.authentication_classes = []
         instance = request.data.get('password')
         request.data['password'] = make_password(instance)
 
@@ -63,8 +61,7 @@ class UserViewSet(viewsets.ModelViewSet):
         # 인증
         user = request.user
         if request.user != None:
-            # print("views.py user객체.user_id",user.user_id)
-            # print("request.user_id", kwargs['pk'])
+            # jwt토큰 payload에 있는 user_id가 url에 들어온 pk와 같은지 비교.
             if user.user_id == int(kwargs['pk']):
 
                 instance = request.data.get('password')
@@ -76,3 +73,14 @@ class UserViewSet(viewsets.ModelViewSet):
         else:
             # 현재 토큰이 존재하지 않음.
             raise exceptions.AuthenticationFailed('로그인이 필요합니다.')
+        
+    def destroy(self, request, *args, **kwargs):
+        user = request.user
+        if request.user != None:
+            # jwt토큰 payload에 있는 user_id가 url에 들어온 pk와 같은지 비교.
+            if user.user_id == int(kwargs['pk']):
+                return super().destroy(request, *args, **kwargs)
+            else :
+                raise exceptions.PermissionDenied('삭제 권한이 없습니다.')
+        else :
+            raise exceptions.PermissionDenied('로그인이 필요합니다.')

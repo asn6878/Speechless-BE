@@ -37,8 +37,6 @@ class JWTAuthentication(authentication.BaseAuthentication):
     def authenticate_credentials(self, request, payload_user_id):
         try:
             user = User.objects.get(user_id=payload_user_id)
-            print("authentication.py user객체 ",user)
-            print("authentication.py user_id",user.user_id)
         except User.DoesNotExist:
             raise exceptions.AuthenticationFailed('User not found')
 
