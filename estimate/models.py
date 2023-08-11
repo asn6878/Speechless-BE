@@ -5,7 +5,7 @@ from user.models import CustomUser as User
 
 class Estimate(models.Model):
     estimate_id = models.BigAutoField(primary_key=True, unique=True, editable=False)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_info')
     title = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     video = models.FileField(upload_to='estimate/%Y/%m/%d', blank=True, null=True)

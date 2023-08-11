@@ -23,7 +23,7 @@ class EstimateSerializer(serializers.ModelSerializer):
 
 # 견적 리스트 시리얼라이저
 class EstimateListSerializer(serializers.ModelSerializer):
-    user_info = UserSerializer(read_only = True)
+    user_info = UserSerializer(source='user_id', read_only = True)
 
     class Meta:
         model = Estimate
@@ -34,10 +34,6 @@ class EstimateListSerializer(serializers.ModelSerializer):
             'created_at',
         ]
 
-    def __str__(self):
-        return f'estimate_id = {self.estimate_id}'
-
-
 # 견적 상세 시리얼라이저
 class EstimateDetailSerializer(serializers.ModelSerializer):
     user_info = UserSerializer(read_only = True)
@@ -45,27 +41,21 @@ class EstimateDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Estimate
         fields = [
-            'title',
             'user_info',
+            'title',
             'created_at',
             'video',
             'content',
             'dead_line',
             'status',
         ]
-
-    def __str__(self):
-        return f'estimate_id = {self.estimate_id}'
-    
+ 
 # 견적 생성 시리얼라이저
 class EstimateCreateSerializer(serializers.ModelSerializer):
-    user_info = UserSerializer(read_only = True)
-
     class Meta:
         model = Estimate
         fields = [
             'title',
-            'user_info',
             'created_at',
             'video',
             'content',
@@ -74,19 +64,13 @@ class EstimateCreateSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
+        # Get the authenticated user object
         user = self.context['request'].user
+        print("호출된 유저 id",user.user_id)
+        # Create the Estimate object and associate it with the authenticated user
+        estimate = Estimate.objects.create(user_id=user, **validated_data)
+        return estimate
 
-        user_data = {
-            'user_id': user.user_id,
-            'user_name': user.user_name,
-            'level': user.level,
-        }
-        return Estimate.objects.create(user_info=user_data, **validated_data)
-    
-    def __str__(self):
-        return f'estimate_id = {self.estimate_id}'
-    
-    
 
 # 입찰 리스트 시리얼라이저
 class OfferListSerializer(serializers.ModelSerializer):
@@ -103,9 +87,3 @@ class OfferListSerializer(serializers.ModelSerializer):
             'content',
             'status',
         ]
-
-    def __str__(self):
-        return f'offer_id = {self.offer_id}'
-
-
-    
