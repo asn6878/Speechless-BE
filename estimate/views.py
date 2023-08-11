@@ -52,7 +52,7 @@ class EstimateViewSet(viewsets.ModelViewSet):
         user = request.user
         if request.user != None:
             # jwt토큰 payload에 있는 user_id가 self object의 user_info 필드의 user_id와 같은지 비교.
-            if user.user_id == self.get_object().user_info.user_id:
+            if user.user_id == int(kwargs['pk']):
                 return super().update(request, *args, **kwargs)
             else :
                 raise exceptions.PermissionDenied('수정 권한이 없습니다.')
@@ -63,7 +63,7 @@ class EstimateViewSet(viewsets.ModelViewSet):
         user = request.user
         if request.user != None:
             # jwt토큰 payload에 있는 user_id가 self object의 user_info 필드의 user_id와 같은지 비교.
-            if user.user_id == self.get_object().user_info.user_id:
+            if user.user_id == int(kwargs['pk']):
                 return super().destroy(request, *args, **kwargs)
             else :
                 raise exceptions.PermissionDenied('삭제 권한이 없습니다.')
