@@ -20,7 +20,7 @@ Database는 개발 동안 원활한 테스트를 위해 sqlite3를 사용중입�
 4. `pip install -r requirements.txt` (의존 라이브러리 설치하기)
 5. BE 팀원에게 `mysettings.py` 파일을 받아 Speechless-BE 디렉토리에 넣어두기
 6. `source venv/script/activate` 혹은 `source venv/bin/activate` (가상환경 실행하기)
-6. `python manage.py runserver` 혹은 `python3 manage.py runserver` (서버 실행하기)
+7. `python manage.py runserver` 혹은 `python3 manage.py runserver` (서버 실행하기)
    ```
    ...
    System check identified no issues (0 silenced).
