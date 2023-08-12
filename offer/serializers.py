@@ -11,6 +11,7 @@ class OfferDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Offer
         fields = [
+            'offer_id',
             'user_id',
             'title',
             'video',
