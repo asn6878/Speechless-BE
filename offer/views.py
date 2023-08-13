@@ -17,6 +17,7 @@ from .serializers import OfferDetailSerializer
 
 class OfferView(APIView):
     permission_classes = [IsAuthenticated]
+
     # pk값의 견적서 안에있는 입찰제안서 목록 조회
     def get(self, request, pk):
         permission_classes = [AllowAny]

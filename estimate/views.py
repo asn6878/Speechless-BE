@@ -16,7 +16,14 @@ from .serializers import EstimateDetailSerializer, EstimateListSerializer, Estim
 
 class EstimateViewSet(viewsets.ModelViewSet):
     queryset = Estimate.objects.all()
-
+    permission_classes_by_action = {
+        'create': [IsAuthenticated],
+        'retrieve': [AllowAny],
+        'update': [IsAuthenticated],
+        'list': [AllowAny],
+        'destroy': [IsAuthenticated],
+    }
+                                    
     def get_serializer_class(self):
         if self.action == 'create':
             print("create 호출됐네!")
@@ -32,21 +39,6 @@ class EstimateViewSet(viewsets.ModelViewSet):
         else :
             # 잘못된 요청임을 알리는 예외 발생
             raise exceptions.MethodNotAllowed(self.request.method)
-
-    def get_permissions(self):
-        if self.action == 'create':
-            return [IsAuthenticated()]
-        elif self.action == 'retrieve':
-            return [AllowAny()]
-        elif self.action == 'update' :
-            return [IsAuthenticated()]
-        elif self.action == 'list' :
-            return [AllowAny()]
-        elif self.action == 'destroy' :
-            return [IsAuthenticated()]
-        else:
-            return [AllowAny()]
-        
 
     def update(self, request, *args, **kwargs):
         user = request.user

@@ -21,7 +21,13 @@ User = get_user_model()
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
-
+    permission_classes_by_action = {
+        'create': [AllowAny],
+        'retrieve': [AllowAny],
+        'update': [IsAuthenticated],
+        'list': [IsAuthenticated],
+        'destroy': [IsAuthenticated],
+    }
     # 기능별로 다른 시리얼라이저를 사용
     def get_serializer_class(self):
         if self.action == 'create':
@@ -37,21 +43,6 @@ class UserViewSet(viewsets.ModelViewSet):
         else:
             # 잘못된 요청임을 알리는 예외 발생
             raise exceptions.MethodNotAllowed(self.request.method)
-
-    # 기능별로 다른 권한을 사용 
-    def get_permissions(self):
-        if self.action == 'create':
-            return [AllowAny()]
-        elif self.action == 'retrieve':
-            return [AllowAny()]
-        elif self.action == 'update' :
-            return [IsAuthenticated()]
-        elif self.action == 'list' :
-            return [IsAuthenticated()]
-        elif self.action == 'destroy' :
-            return [IsAuthenticated()]
-        else:
-            return [AllowAny()]
 
     # 각 기능을 커스터마이징(여기서는 비밀번호 암호화) 하기위해 오버라이딩 해줬다.
     def create(self, request, *args, **kwargs):

@@ -24,7 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework', # drf
     'drf_yasg', # swagger
-    'corsheaders',
+    'corsheaders', # cors
     'estimate',
     'user',
     'info',
