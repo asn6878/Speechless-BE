@@ -7,16 +7,30 @@ from .models import Offer
 
 User = get_user_model()
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            'user_id',
+            'user_name',
+        ]
+
 class OfferDetailSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True, source='user_id')
     class Meta:
         model = Offer
         fields = [
             'offer_id',
-            'user_id',
-            'title',
-            'video',
+            'user',
             'content',
             'price',
-            'created_at',
             'status',
+        ]
+    
+class OfferCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Offer
+        fields = [
+            'content',
+            'price',
         ]

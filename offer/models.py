@@ -13,3 +13,6 @@ class Offer(models.Model):
     content = models.TextField(blank=True)
     # 0 (진행전) 1 (계약진행중) 3 (계약 진행완료)
     status = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.content
