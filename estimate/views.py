@@ -26,7 +26,6 @@ class EstimateViewSet(viewsets.ModelViewSet):
                                     
     def get_serializer_class(self):
         if self.action == 'create':
-            print("create 호출됐네!")
             return EstimateCreateSerializer
         elif self.action == 'retrieve':
             return EstimateDetailSerializer
