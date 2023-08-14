@@ -17,9 +17,9 @@ Database는 개발 동안 원활한 테스트를 위해 sqlite3를 사용중입�
 1. `git clone https://github.com/Likelion-YeungNam-Univ/Speechless-BE.git` (프로젝트파일 받아오기)
 2. `cd Speechless-BE` (프로젝트 디렉토리로 이동하기)
 3. `python -m venv venv` 혹은 `python3 -m venv venv` (파이썬 가상환경 생성하기)
-4. `pip install -r requirements.txt` (의존 라이브러리 설치하기)
-5. BE 팀원에게 `mysettings.py` 파일을 받아 Speechless-BE 디렉토리에 넣어두기
-6. `source venv/script/activate` 혹은 `source venv/bin/activate` (가상환경 실행하기)
+4. `source venv/script/activate` 혹은 `source venv/bin/activate` (가상환경 실행하기)
+5. `pip install -r requirements.txt` (의존 라이브러리 설치하기)
+6. BE 팀원에게 `mysettings.py` 파일을 받아 Speechless-BE 디렉토리에 넣어두기
 7. `python manage.py runserver` 혹은 `python3 manage.py runserver` (서버 실행하기)
    ```
    ...
