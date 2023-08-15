@@ -55,3 +55,13 @@ class MessageSerializer(serializers.Serializer):
     class Meta:
         model = Message
         fields = ['sender', 'receiver', 'content', 'sent_time']
+
+class EmailFindSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+class IdReturnSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = [
+            'id',
+        ]
