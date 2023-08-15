@@ -54,4 +54,4 @@ class ReviewSerializer(serializers.Serializer):
 class MessageSerializer(serializers.Serializer):
     class Meta:
         model = Message
-        fields = ['sender', 'receiver', 'title', 'content', 'sent_time', 'read_status', 'read_time', 'starred', 'deleted', 'attachments']
+        fields = ['sender', 'receiver', 'content', 'sent_time']

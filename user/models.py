@@ -73,16 +73,11 @@ class Review(models.Model):
 
 #쪽지
 class Message(models.Model):
+    msg_id = models.BigAutoField(primary_key=True, unique=True, editable=False)
     sender = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='sent_messages', on_delete=models.CASCADE) #발신자
     receiver = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='received_messages', on_delete=models.CASCADE) #수신자
-    title = models.CharField(max_length=100) #제목
     content = models.TextField() #내용
     sent_time = models.DateTimeField(auto_now_add=True) #전송시간
-    read_status = models.BooleanField(default=False) #읽음 상태
-    read_time = models.DateTimeField(null=True, blank=True) #읽은 시간
-    starred = models.BooleanField(default=False) #중요 표시
-    deleted = models.BooleanField(default=False) #첨부파일
-    attachments = models.FileField(upload_to='attachments/', blank=True, null=True) #삭제 플래그: 쪽지를 삭제했는지의 여부
 
     def __str__(self):
         return self.title

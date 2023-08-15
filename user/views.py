@@ -1,5 +1,7 @@
 # drf 관련 라이브러리
 from rest_framework import viewsets
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from django.contrib.auth.hashers import make_password
 from rest_framework import exceptions
 from .models import Notification, Review, Message
@@ -89,6 +91,20 @@ class ReviewViewSet(viewsets.ModelViewSet):
     serializer_class = ReviewSerializer
 
 #쪽지
-class MessageViewSet(viewsets.ModelViewSet):
-    queryset = Message.objects.all()
-    serializer_class = MessageSerializer
+class MessageView(APIView):
+    def post(self, request):
+        # msg_serializer = 
+        pass
+
+class SentMessageView(APIView):
+    def get(self, request):
+        messages = Message.objects.filter(sender=request.user)
+        serializer = MessageSerializer(messages, many=True)
+        return Response(serializer.data)
+
+class ReceivedMessageView(APIView):
+    def get(self, request):
+        messages = Message.objects.filter(receiver=request.user)
+        serializer = MessageSerializer(messages, many=True)
+        return Response(serializer.data)
+    
