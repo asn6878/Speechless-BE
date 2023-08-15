@@ -5,12 +5,11 @@ from rest_framework import viewsets, exceptions, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 
-
 # drf 권한 관련 라이브러리
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 
 # models.py
-from .models import Estimate
+from .models import Estimate, Bookmark
 # serializers.py
 from .serializers import EstimateDetailSerializer, EstimateListSerializer, EstimateCreateSerializer, OfferListSerializer
 
@@ -61,20 +60,10 @@ class EstimateViewSet(viewsets.ModelViewSet):
         else :
             raise exceptions.PermissionDenied('로그인이 필요합니다.')
                 
-
-# class OfferListView(APIView):
-#     # 해당 id 견적글의 Offer List 조회
-#     def get(self, request, pk):
-#         permission_classes = [AllowAny]
-#         offers = Offer.objects.filter(offer_id.estimate_id = pk)
-#         serializer = OfferListSerializer(offers, many=True)
-#         return Response(serializer.data, status=status.HTTP_200_OK)
-    
-#     # 해당 id 견적글에 입찰하기
-#     def post(self, request, pk):
+# class BookmarkView(APIView):
+#     def get(self, request):
 #         permission_classes = [IsAuthenticated]
-#         serializer = OfferListSerializer(data=request.data)
+#         bookmarks = Bookmark.objects.filter()
+#         serializer = BookmarkSerializer(bookmarks, many=True)
+#         return Response(serializer.data)
 
-
-
-#     def offers(self, request, pk):

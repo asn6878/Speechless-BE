@@ -41,6 +41,7 @@ class EstimateDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Estimate
         fields = [
+            'estimate_id',
             'user_info',
             'title',
             'created_at',
