@@ -10,7 +10,7 @@ SECRET_KEY = mysettings.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*",'0.0.0.0', "website"]
+ALLOWED_HOSTS = ['*','0.0.0.0', "localhost","https://cbe9-118-41-48-147.ngrok-free.app"]
 
 
 # Application definition
@@ -63,7 +63,8 @@ CORS_ALLOW_HEADERS = [ # cors 허용할 헤더
     "x-csrftoken",
     "x-requested-with",
 ]
-
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
 # 이런식으로 각각 URL, 정규표현식, 전체 허용 or 차단 처럼 설정이 가능하다.
@@ -82,12 +83,15 @@ CORS_ALLOW_CREDENTIALS = True
 
 
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8000",
-    "http://localhost:3000",
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:8000",
+#     "http://localhost:3000",
+#     "http://localhost:4040", #ngrok
+#     "https://cbe9-118-41-48-147.ngrok-free.app",
+# ]
 
-CORS_ALLOW_ALL_ORIGINS: True
+
+
 
 ROOT_URLCONF = 'config.urls'
 

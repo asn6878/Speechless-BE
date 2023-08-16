@@ -34,6 +34,8 @@ class EstimateViewSet(viewsets.ModelViewSet):
             return EstimateListSerializer
         elif self.action == 'destroy' :
             return EstimateListSerializer
+        elif self.action == 'partial_update' :
+            return EstimateDetailSerializer
         else :
             # 잘못된 요청임을 알리는 예외 발생
             raise exceptions.MethodNotAllowed(self.request.method)
@@ -60,6 +62,7 @@ class EstimateViewSet(viewsets.ModelViewSet):
         else :
             raise exceptions.PermissionDenied('로그인이 필요합니다.')
                 
+    
 # class BookmarkView(APIView):
 #     def get(self, request):
 #         permission_classes = [IsAuthenticated]
