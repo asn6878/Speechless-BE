@@ -65,3 +65,18 @@ class IdReturnSerializer(serializers.ModelSerializer):
         fields = [
             'id',
         ]
+
+class PasswordChangeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = [
+            'user_id',
+            'password',
+        ]
+        extra_kwargs = {
+            'password': {'write_only': True},
+        }
+
+class PasswordChangeReturnSerializer(serializers.Serializer):
+    user_id = serializers.IntegerField()
+    password = serializers.CharField()
