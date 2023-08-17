@@ -36,7 +36,7 @@ class EstimateListSerializer(serializers.ModelSerializer):
 
 # 견적 상세 시리얼라이저
 class EstimateDetailSerializer(serializers.ModelSerializer):
-    user_info = UserSerializer(read_only = True)
+    user_info = UserSerializer(source='user_id', read_only = True)
 
     class Meta:
         model = Estimate
