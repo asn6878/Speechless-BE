@@ -21,7 +21,7 @@ urlpatterns = [
     path('login/refreshments/', TokenRefreshView.as_view(), name='token_refresh'),
     path('recover/id/', views.EmailIdFindView.as_view(), name='recover_id'),
     path('recover/password/modifications/', views.EmailPasswdUpdateView.as_view(), name='password_modification'),
-    path('auth/', views.UserAuthView.as_view(), name='auth'),
+    path('login/auth/', views.UserAuthView.as_view(), name='auth'),
 ]
 
 

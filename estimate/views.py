@@ -39,6 +39,10 @@ class EstimateViewSet(viewsets.ModelViewSet):
         else :
             # 잘못된 요청임을 알리는 예외 발생
             raise exceptions.MethodNotAllowed(self.request.method)
+        
+    def create(self, request, *args, **kwargs):
+        print("이거데이터임",request.data)
+        return super().create(request, *args, **kwargs) 
 
     def update(self, request, *args, **kwargs):
         user = request.user

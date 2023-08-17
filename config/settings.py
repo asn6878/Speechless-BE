@@ -83,12 +83,12 @@ CORS_ALLOW_CREDENTIALS = True
 
 
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:8000",
-#     "http://localhost:3000",
-#     "http://localhost:4040", #ngrok
-#     "https://cbe9-118-41-48-147.ngrok-free.app",
-# ]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+    "http://localhost:3000",
+    "http://localhost:4040", #ngrok
+    "https://4fa0-118-41-48-147.ngrok-free.app",
+]
 
 
 

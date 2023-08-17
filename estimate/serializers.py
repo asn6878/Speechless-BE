@@ -71,6 +71,7 @@ class EstimateCreateSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('로그인이 필요합니다.')
         # print("호출된 유저 id",user.user_id)
         # estimate 오브젝트 생성 (user_id 필드에는 user 오브젝트 넣어준다.)
+        print("validated_data",validated_data)
         estimate = Estimate.objects.create(user_id=user, **validated_data)
         return estimate
 
