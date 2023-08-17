@@ -7,6 +7,7 @@ from rest_framework import exceptions
 from .models import Notification, Review, Message
 from .serializers import NotificationSerializer, ReviewSerializer, MessageSerializer, PasswordChangeSerializer, PasswordChangeReturnSerializer
 from rest_framework import status
+from django.http import JsonResponse
 
 # swagger
 from drf_yasg.utils import swagger_auto_schema
@@ -167,3 +168,12 @@ class UserAuthView(APIView):
         serializer = UserSerializer(auth_user)
         return Response(serializer.data ,status=status.HTTP_200_OK)
     
+class UserLogoutView(APIView):
+    def get(self, request):
+        response = Response({
+            "message": "Logout success"
+            }, status=status.HTTP_202_ACCEPTED)
+        response.delete_cookie('ACCESS_TOKEN')
+
+        return response
+

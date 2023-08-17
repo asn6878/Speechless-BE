@@ -22,6 +22,7 @@ urlpatterns = [
     path('recover/id/', views.EmailIdFindView.as_view(), name='recover_id'),
     path('recover/password/modifications/', views.EmailPasswdUpdateView.as_view(), name='password_modification'),
     path('login/auth/', views.UserAuthView.as_view(), name='auth'),
+    path('logout/tokens/', views.UserLogoutView.as_view(), name='logout'),
 ]
 
 
