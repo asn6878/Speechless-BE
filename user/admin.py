@@ -34,6 +34,7 @@ class ReviewAdmin(admin.ModelAdmin):
     search_fields = ['content']
 
 #register
+admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Message)
 admin.site.register(Notification, NotificationAdmin)
 admin.site.register(Review, ReviewAdmin)
