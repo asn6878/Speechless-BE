@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from django.contrib.auth.hashers import make_password
 from rest_framework import exceptions
 from .models import Notification, Review, Message
-from .serializers import NotificationSerializer, ReviewSerializer, MessageSerializer, PasswordChangeSerializer, PasswordChangeReturnSerializer
+from .serializers import NotificationSerializer, ReviewSerializer, MessageSerializer, PasswordChangeSerializer, PasswordChangeReturnSerializer, PasswordMatchSerializer,UserIndexReturnSerializer
 from rest_framework import status
 from django.http import JsonResponse
 
@@ -159,14 +159,34 @@ class EmailPasswdUpdateView(APIView):
                 }, status = status.HTTP_400_BAD_REQUEST)
         else :
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
+
+
+class PasswordMatchView(APIView):
+    @swagger_auto_schema(request_body=PasswordMatchSerializer)
+    def post(self, request):
+        permission_classes = [AllowAny]
+        serializer = PasswordMatchSerializer(data=request.data)
+        if serializer.is_valid():
+            if User.objects.get(id = serializer.data['id']) == User.objects.get(email = serializer.data['user_email']):
+                response_serializer = UserIndexReturnSerializer(User.objects.get(email = serializer.data['user_email']))
+                return Response(response_serializer.data,status=status.HTTP_200_OK)
+            else :
+                return Response(
+                    {
+                    "detail" : "해당하는 User 존재하지 않음! "
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 class UserAuthView(APIView):
     def get(self, request):
         permission_classes = [IsAuthenticated]
         user = request.user
         auth_user = User.objects.get(user_id = user.user_id)
         serializer = UserSerializer(auth_user)
-        return Response(serializer.data ,status=status.HTTP_200_OK)
+        return Response(serializer.data ,status=status.HTTP_200_OK)    
+
     
 class UserLogoutView(APIView):
     def get(self, request):
@@ -176,4 +196,3 @@ class UserLogoutView(APIView):
         response.delete_cookie('ACCESS_TOKEN')
 
         return response
-

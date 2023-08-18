@@ -59,11 +59,22 @@ class MessageSerializer(serializers.Serializer):
 class EmailFindSerializer(serializers.Serializer):
     email = serializers.EmailField()
 
+class PasswordMatchSerializer(serializers.Serializer):
+    user_email = serializers.EmailField()
+    id = serializers.CharField()
+
 class IdReturnSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = [
             'id',
+        ]
+
+class UserIndexReturnSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = [
+            'user_id',
         ]
 
 class PasswordChangeSerializer(serializers.ModelSerializer):
