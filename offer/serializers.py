@@ -12,6 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = [
             'user_id',
+            'level',
             'user_name',
         ]
 
