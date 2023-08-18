@@ -10,7 +10,7 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
     openapi.Info(
-        title='Toy_Project_Blog',
+        title='HSB_Server API',
         default_version='0.0',
         description='영남대 멋사 11기 말문희막힘팀 해커톤 API 문서입니다.',
         terms_of_service="https://www.google.com/policies/terms/",
@@ -36,5 +36,6 @@ if settings.DEBUG:
         re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
         re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc')
         ]
+    
 
-
+    
